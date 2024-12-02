@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>Tasks</title>
+{% endblock %}
+{% block content %}
+  <h1>
+    Tasks
+    <a class="btn btn-primary btn-create" href="{% url 'task_manager:task-create' %}">+</a>
+  </h1>
+  <ul>
+    {% for task in task_list %}
+      <li>
+        <a href="{% url 'task_manager:task-detail' task.pk %}">
+          {{ task.name }}
+        </a>
+        <a class="btn btn-primary" href="{% url 'task_manager:task-update' task.pk %}">
+          Update
+        </a>
+        <a class="btn btn-danger" href="{% url 'task_manager:task-delete' task.pk %}">
+          Delete
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
