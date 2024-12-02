@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>Tasks</title>
+{% endblock %}
+{% block content %}
+  <h1>
+    Positions
+    <a class="btn btn-primary btn-create" href="{% url 'task_manager:position-create' %}">+</a>
+  </h1>
+  <ul>
+    {% for position in position_list %}
+      <li>
+        {{ position.name }}
+        <a class="btn btn-primary" href="{% url 'task_manager:position-update' position.pk %}">
+          Update
+        </a>
+        <a class="btn btn-danger" href="{% url 'task_manager:position-delete' position.pk %}">
+          Delete
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
