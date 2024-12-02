@@ -1,8 +1,17 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from task_manager.models import Position, TaskType
+from task_manager.forms import (
+    WorkerCreationForm,
+    WorkerUpdateForm
+)
+from task_manager.models import (
+    Position,
+    TaskType,
+    Worker
+)
 
 
 class PositionListView(generic.ListView):
@@ -46,3 +55,19 @@ class TaskTypeDeleteView(generic.DeleteView):
     model = TaskType
     template_name = "task_manager/task_type_confirm_delete.html"
     success_url = reverse_lazy("task_manager:task-type-list")
+
+
+class WorkerCreateView(generic.CreateView):
+    model = Worker
+    form_class = WorkerCreationForm
+    success_url = reverse_lazy("login")
+
+
+def profile_view(request: HttpRequest) -> HttpResponse:
+    return render(request, "task_manager/profile.html")
+
+
+class WorkerUpdateView(generic.UpdateView):
+    model = Worker
+    form_class = WorkerUpdateForm
+    success_url = reverse_lazy("task_manager:profile")

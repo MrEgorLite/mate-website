@@ -1,16 +1,19 @@
 <ul class="sidebar-nav">
-  <li>
   {% if user.is_authenticated %}
-      User: {{ user.username }}
-      <br>
+    <li>
+      <a class="btn btn-primary" href="{% url 'task_manager:profile' %}">Profile</a>
+    </li>
+    <li>
       <form action="{% url 'logout' %}" method="post">
       {% csrf_token %}
-      <input type="submit" value="Logout">
+      <input class="btn btn-primary" type="submit" value="Logout">
       </form>
+    </li>
   {% else %}
+    <li>
     <a href="{% url 'login' %}">Login</a>
+    </li>
   {% endif %}
-  </li>
   <br>
   <li>
     <a href="{% url 'task_manager:position-list' %}">Positions</a>

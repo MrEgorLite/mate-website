@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+  <title>Login</title>
+{% endblock %}
+{% block content %}
+  <h1>Login</h1>
+  <form action="{% url 'login' %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+    <br>
+    {% if form.errors %}
+      <p style="color: red">Login or password not valid</p>
+      <br>
+    {% endif %}
+  <input type="submit" value="Submit">
+  <input type="hidden" name="next" value="{{ next }}">
+  </form>
+  <a class="btn btn-primary" href="{% url 'task_manager:register' %}">Register</a>
+{% endblock %}

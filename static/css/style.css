@@ -5,3 +5,8 @@ body {
 .btn-create {
     float: right;
 }
+
+.sidebar-nav {
+    padding: 0;
+    list-style: none;
+}
