@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.template.context_processors import request
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
@@ -80,6 +79,7 @@ class TestAdminRequired(TestCase):
         url = reverse("task_manager:profile")
         res = self.client.get(url)
         self.assertEqual(res.status_code, 200)
+
 
 class TestViews(TestCase):
     def setUp(self):

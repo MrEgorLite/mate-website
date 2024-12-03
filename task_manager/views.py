@@ -29,14 +29,17 @@ class PositionCreateView(LoginRequiredMixin, generic.CreateView):
     fields = ["name"]
     success_url = reverse_lazy("task_manager:position-list")
 
+
 class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Position
     fields = ["name"]
     success_url = reverse_lazy("task_manager:position-list")
 
+
 class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Position
     success_url = reverse_lazy("task_manager:position-list")
+
 
 class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
@@ -82,6 +85,7 @@ class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
+
     def get_queryset(self):
         queryset = Task.objects.filter(assignees__id=self.request.user.id)
         return queryset
@@ -89,6 +93,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
+
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
@@ -113,6 +118,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class TaskCreatedListView(LoginRequiredMixin, generic.ListView):
     model = Task
+
     def get_queryset(self):
         queryset = Task.objects.filter(author_id=self.request.user.id)
         return queryset

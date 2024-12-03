@@ -7,7 +7,11 @@ from task_manager.models import Worker, Task
 class WorkerCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Worker
-        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "position")
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "position"
+        )
 
 
 class WorkerUpdateForm(UserChangeForm):
