@@ -13,11 +13,20 @@
         <a href="{% url 'task_manager:task-detail' task.pk %}">
           {{ task.name }}
         </a>
-        <a class="btn btn-primary" href="{% url 'task_manager:task-update' task.pk %}">
-          Update
-        </a>
-        <a class="btn btn-danger" href="{% url 'task_manager:task-delete' task.pk %}">
-          Delete
+        {% if user == task.author %}
+          <a class="btn btn-primary" href="{% url 'task_manager:task-update' task.pk %}">
+            Update
+          </a>
+          <a class="btn btn-danger" href="{% url 'task_manager:task-delete' task.pk %}">
+            Delete
+          </a>
+        {% endif %}
+        <a class="btn btn-light" href="{% url 'task_manager:task-complete' task.pk %}">
+          {% if task.is_completed %}
+            Discard task
+          {% else %}
+            Complete task
+          {% endif %}
         </a>
       </li>
     {% endfor %}

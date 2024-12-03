@@ -5,13 +5,22 @@
 
 {% block content %}
   <h1>Task Detail</h1>
-  <p>{{ task.name }}</p>
-  <p>{{ task.description }}</p>
+  <p>Name: {{ task.name }}</p>
+  {% if task.description %}
+    <p>Description: {{ task.description }}</p>
+  {% endif %}
+  {% if task.status %}
+    <p>Status: Complete</p>
+  {% else %}
+    <p>Status: Not Complete</p>
+  {% endif %}
+  <p> Type: {{ task.task_type.name }}</p>
+  <p>Author: {{ task.author }}</p>
   <a class="btn btn-primary" href="{% url 'task_manager:task-complete' task.pk %}">
     {% if task.is_completed %}
-      Complete task
-    {% else %}
       Discard task
+    {% else %}
+      Complete task
     {% endif %}
   </a>
 {% endblock %}

@@ -22,6 +22,9 @@ class Worker(AbstractUser):
 class TaskType(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Task(models.Model):
     PRIORITY_CHOICES = (
@@ -36,7 +39,7 @@ class Task(models.Model):
     is_completed = models.BooleanField(default=False)
     priority = models.CharField(choices=PRIORITY_CHOICES, max_length=8)
     task_type = models.ForeignKey(
-        Position,
+        TaskType,
         on_delete=models.SET_NULL,
         related_name="tasks",
         null=True
@@ -47,3 +50,6 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         related_name="created_tasks"
     )
+
+    def __str__(self):
+        return self.name
