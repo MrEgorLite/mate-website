@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>Tasks</title>
+  <title>Created tasks</title>
 {% endblock %}
 
 {% block content %}
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Tasks</h1>
+    <h1>Created tasks</h1>
+    <a class="btn btn-primary" href="{% url 'task_manager:task-create' %}">
+      Create task
+    </a>
   </div>
 
   {% if task_list %}
@@ -47,13 +50,23 @@
                 {% endif %}
               </td>
               <td>
-                <a href="{% url 'task_manager:task-complete' task.pk %}" class="btn btn-sm {% if task.is_completed %}btn-danger{% else %}btn-success{% endif %}">
-                  {% if task.is_completed %}
-                    Discard
-                  {% else %}
-                    Complete
+                <div class="d-flex gap-2">
+                  {% if user == task.author %}
+                    <a href="{% url 'task_manager:task-update' task.pk %}" class="btn btn-sm btn-primary">
+                      Update
+                    </a>
+                    <a href="{% url 'task_manager:task-delete' task.pk %}" class="btn btn-sm btn-danger">
+                      Delete
+                    </a>
                   {% endif %}
-                </a>
+                  <a href="{% url 'task_manager:task-complete' task.pk %}" class="btn btn-sm {% if task.is_completed %}btn-danger{% else %}btn-success{% endif %}">
+                    {% if task.is_completed %}
+                      Discard
+                    {% else %}
+                      Complete
+                    {% endif %}
+                  </a>
+                </div>
               </td>
             </tr>
           {% endfor %}
@@ -62,7 +75,7 @@
     </div>
   {% else %}
     <div class="alert alert-info">
-      No tasks available. <a href="{% url 'task_manager:task-create' %}" class="alert-link">Create a new task</a>.
+      No created tasks available. <a href="{% url 'task_manager:task-create' %}" class="alert-link">Create a new task</a>.
     </div>
   {% endif %}
 {% endblock %}

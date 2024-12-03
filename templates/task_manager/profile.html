@@ -1,24 +1,40 @@
 {% extends "base.html" %}
+
 {% block title %}
   <title>Profile</title>
 {% endblock %}
+
 {% block content %}
-  <h1>
-    Profile
-  </h1>
-  {% if user.first_name %}
-    <p>First name: {{ user.first_name }}</p>
-  {% endif %}
-  {% if user.last_name %}
-    <p>Last name: {{ user.last_name }}</p>
-  {% endif %}
-  {% if user.email %}
-    <p>Email address: {{ user.email }}</p>
-  {% endif %}
-  {% if user.position %}
-    <p>Position: {{ user.position }}</p>
-  {% else %}
-    <p>Position: Not set</p>
-  {% endif %}
-  <a class="btn btn-primary" href="{% url 'task_manager:profile-update' user.pk %}">Update</a>
+  <div class="card shadow-sm mx-auto">
+    <div class="card-header bg-primary text-white">
+      <h1 class="h4 mb-0">Profile</h1>
+    </div>
+    <div class="card-body">
+      <dl class="row">
+        {% if user.first_name %}
+          <dt class="col-sm-4">First Name</dt>
+          <dd class="col-sm-8">{{ user.first_name }}</dd>
+        {% endif %}
+        {% if user.last_name %}
+          <dt class="col-sm-4">Last Name</dt>
+          <dd class="col-sm-8">{{ user.last_name }}</dd>
+        {% endif %}
+        {% if user.email %}
+          <dt class="col-sm-4">Email Address</dt>
+          <dd class="col-sm-8">{{ user.email }}</dd>
+        {% endif %}
+        <dt class="col-sm-4">Position</dt>
+        <dd class="col-sm-8">
+          {% if user.position %}
+            {{ user.position }}
+          {% else %}
+            <span class="text-muted">Not set</span>
+          {% endif %}
+        </dd>
+      </dl>
+    </div>
+    <div class="card-footer text-center">
+      <a href="{% url 'task_manager:profile-update' user.pk %}" class="btn btn-primary">Update Profile</a>
+    </div>
+  </div>
 {% endblock %}

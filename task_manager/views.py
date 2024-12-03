@@ -70,6 +70,7 @@ class WorkerCreateView(generic.CreateView):
     model = Worker
     form_class = WorkerCreationForm
     success_url = reverse_lazy("login")
+    template_name = "registration/register.html"
 
 
 @login_required
@@ -118,6 +119,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class TaskCreatedListView(LoginRequiredMixin, generic.ListView):
     model = Task
+    template_name = "task_manager/task_created_list.html"
 
     def get_queryset(self):
         queryset = Task.objects.filter(author_id=self.request.user.id)

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load crispy_forms_filters %}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% load static %}
@@ -9,12 +10,8 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <style>
     body {
-      background-color: #e3f2fd;
-      height: 100vh;
-      display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0;
     }
   </style>
 </head>
@@ -23,7 +20,7 @@
     <h1>Login</h1>
     <form action="{% url 'login' %}" method="post">
       {% csrf_token %}
-      {{ form.as_p }}
+      {{ form|crispy }}
       {% if form.errors %}
         <p class="error-message">Login or password not valid</p>
       {% endif %}

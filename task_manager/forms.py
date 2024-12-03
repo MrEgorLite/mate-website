@@ -21,13 +21,16 @@ class WorkerUpdateForm(UserChangeForm):
 
 
 class TaskForm(forms.ModelForm):
+    assignees = forms.ModelMultipleChoiceField(
+        queryset=Worker.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
     class Meta:
         model = Task
         fields = [
             "name",
             "description",
             "deadline",
-            "is_completed",
             "priority",
             "task_type",
             "assignees",

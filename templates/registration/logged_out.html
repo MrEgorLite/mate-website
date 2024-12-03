@@ -1,5 +1,27 @@
-{% extends "base.html" %}
-{% block content %}
-  <p>Logged out</p>
-  <a href="{% url 'login' %}">Click here to login</a>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load crispy_forms_filters %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    body {
+      justify-content: center;
+      align-items: center;
+    }
+    h4 {
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h4>You have been logged out</h4>
+    <a class="btn btn-primary register-link" href="{% url 'login' %}">Login</a>
+  </div>
+</body>
+</html>

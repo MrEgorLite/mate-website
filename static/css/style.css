@@ -1,14 +1,43 @@
 body {
-    margin-top: 20px;
+  background-color: #e3f2fd;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main-container {
+  flex: 1;
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem;
+}
+.sidebar {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-right: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.content {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+footer {
+  text-align: center;
+  padding: 0.5rem;
+  background: white;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-create {
     float: right;
-}
-
-.sidebar-nav {
-    padding: 0;
-    list-style: none;
 }
 
 .login-box {
@@ -35,4 +64,10 @@ body {
   color: red;
   text-align: center;
   margin-top: 0.5rem;
+}
+
+.deadline {
+    font-size: 12px;
+    color: #a34a4a;
+    margin-top: 5px;
 }
