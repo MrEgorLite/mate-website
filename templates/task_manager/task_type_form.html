@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>{{ object|yesno:"Update,Create" }} Task type</title>
+  <title>{{ object|yesno:"Update,Create" }} task type</title>
 {% endblock %}
 
 {% block content %}
   {% load crispy_forms_filters %}
   <div class="card shadow-sm mx-auto">
     <div class="card-header bg-primary text-white">
-      <h1 class="h5 mb-0">{{ object|yesno:"Update,Create" }} Task type</h1>
+      <h1 class="h5 mb-0">{{ object|yesno:"Update,Create" }} task type</h1>
     </div>
     <div class="card-body">
       <form action="" method="post">

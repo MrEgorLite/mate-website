@@ -29,8 +29,8 @@
                 </a>
               </td>
               <td>
-                {% if not task.is_completed and task.deadline %}
-                  {% if task.is_expired %}
+                {% if task.deadline %}
+                  {% if task.is_expired and not task.is_completed %}
                     <span class="text-danger">{{ task.deadline|date:"M d, Y H:i" }}</span>
                   {% else %}
                     {{ task.deadline|date:"M d, Y H:i" }}
