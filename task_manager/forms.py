@@ -25,6 +25,7 @@ class TaskForm(forms.ModelForm):
         queryset=Worker.objects.all(),
         widget=forms.CheckboxSelectMultiple,
     )
+
     class Meta:
         model = Task
         fields = [
