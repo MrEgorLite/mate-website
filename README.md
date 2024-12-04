@@ -23,3 +23,10 @@ pip install -r requirements.txt
 ```
 python manage.py migrate
 ```
+
+link to deploy
+https://task-manager-3mld.onrender.com
+
+login: admin
+
+password: admin
