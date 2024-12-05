@@ -1,37 +1,31 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>Created tasks</title>
+  <title>Task Details</title>
 {% endblock %}
 
 {% block content %}
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Created tasks</h1>
+    <h1>All Task Details</h1>
     <a class="btn btn-primary" href="{% url 'task_manager:task-create' %}">
-      Create task
+      Create New Task
     </a>
   </div>
 
   {% if task_list %}
-    <div class="table-responsive">
-      <table class="table table-striped table-hover">
-        <thead class="table-light">
-          <tr>
-            <th>Task</th>
-            <th>Deadline</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for task in task_list %}
-            <tr>
-              <td>
-                <a href="{% url 'task_manager:task-detail' task.pk %}" class="text-decoration-none">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for task in task_list %}
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">
                   {{ task.name }}
-                </a>
-              </td>
-              <td>
+              </h5>
+              <p class="card-text">
+                {{ task.description|default:"No description provided" }}
+              </p>
+              <p class="card-text">
+                <strong>Deadline:</strong>
                 {% if task.deadline %}
                   {% if task.is_expired and not task.is_completed %}
                     <span class="text-danger">{{ task.deadline|date:"M d, Y H:i" }}</span>
@@ -41,41 +35,53 @@
                 {% else %}
                   <span class="text-muted">No deadline</span>
                 {% endif %}
-              </td>
-              <td>
+              </p>
+              <p class="card-text"><strong>Priority:</strong> {{ task.priority }}</p>
+              <p class="card-text"><strong>Type:</strong> {{ task.task_type.name|default:"No type assigned" }}</p>
+              <p class="card-text">
+                <strong>Assignees:</strong>
+                {% if task.assignees.exists %}
+                  {% for assignee in task.assignees.all %}
+                    {{ assignee.first_name }} {{ assignee.last_name }}{% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                {% else %}
+                  <span class="text-muted">No assignees</span>
+                {% endif %}
+              </p>
+              <p class="card-text"><strong>Author:</strong> {{ task.author }}</p>
+              <p class="card-text">
+                <strong>Status:</strong>
                 {% if task.is_completed %}
                   <span class="badge bg-success">Completed</span>
                 {% else %}
                   <span class="badge bg-warning text-dark">Pending</span>
                 {% endif %}
-              </td>
-              <td>
-                <div class="d-flex gap-2">
-                  {% if user == task.author %}
-                    <a href="{% url 'task_manager:task-update' task.pk %}" class="btn btn-sm btn-primary">
-                      Update
-                    </a>
-                    <a href="{% url 'task_manager:task-delete' task.pk %}" class="btn btn-sm btn-danger">
-                      Delete
-                    </a>
-                  {% endif %}
-                  <a href="{% url 'task_manager:task-complete' task.pk %}" class="btn btn-sm {% if task.is_completed %}btn-danger{% else %}btn-success{% endif %}">
-                    {% if task.is_completed %}
-                      Discard
-                    {% else %}
-                      Complete
-                    {% endif %}
-                  </a>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+              </p>
+            </div>
+            <div class="card-footer d-flex gap-2">
+              {% if user == task.author %}
+                <a href="{% url 'task_manager:task-update' task.pk %}" class="btn btn-sm btn-primary">
+                  Update
+                </a>
+                <a href="{% url 'task_manager:task-delete' task.pk %}" class="btn btn-sm btn-danger">
+                  Delete
+                </a>
+              {% endif %}
+              <a href="{% url 'task_manager:task-complete' task.pk %}" class="btn btn-sm {% if task.is_completed %}btn-danger{% else %}btn-success{% endif %}">
+                {% if task.is_completed %}
+                  Discard
+                {% else %}
+                  Complete
+                {% endif %}
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   {% else %}
     <div class="alert alert-info">
-      No created tasks available. <a href="{% url 'task_manager:task-create' %}" class="alert-link">Create a new task</a>.
+      No tasks available. <a href="{% url 'task_manager:task-create' %}" class="alert-link">Create a new task</a>.
     </div>
   {% endif %}
 {% endblock %}
