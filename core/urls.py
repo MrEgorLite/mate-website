@@ -24,4 +24,4 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("", include("task_manager.urls", namespace="task_manager")),
     path("user/", include("user.urls", namespace="user")),
-] + debug_toolbar_urls()
+]
