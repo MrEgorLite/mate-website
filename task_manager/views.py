@@ -44,6 +44,9 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
 
+    def get_queryset(self):
+        return Task.objects.filter(id=self.kwargs["pk"]).select_related("author").select_related("task_type")
+
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
@@ -71,7 +74,7 @@ class TaskCreatedListView(LoginRequiredMixin, generic.ListView):
     template_name = "task_manager/task_created_list.html"
 
     def get_queryset(self):
-        queryset = Task.objects.filter(author_id=self.request.user.id)
+        queryset = Task.objects.filter(author_id=self.request.user.id).select_related("author").select_related("task_type").prefetch_related("assignees")
         return queryset
 
 
