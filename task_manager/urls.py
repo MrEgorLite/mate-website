@@ -17,31 +17,31 @@ from task_manager.views import (
 app_name = "task_manager"
 
 urlpatterns = [
-    path("task-type/", TaskTypeListView.as_view(), name="task-type-list"),
+    path("task-types/", TaskTypeListView.as_view(), name="task-type-list"),
     path(
-        "task-type/create/",
+        "task-types/create/",
         TaskTypeCreateView.as_view(),
         name="task-type-create",
     ),
     path(
-        "task-type/<int:pk>/update/",
+        "task-types/<int:pk>/update/",
         TaskTypeUpdateView.as_view(),
         name="task-type-update",
     ),
     path(
-        "task-type/<int:pk>/delete/",
+        "task-types/<int:pk>/delete/",
         TaskTypeDeleteView.as_view(),
         name="task-type-delete",
     ),
     path("", TaskListView.as_view(), name="task-list"),
-    path("task/create/", TaskCreateView.as_view(), name="task-create"),
+    path("tasks/create/", TaskCreateView.as_view(), name="task-create"),
     path(
-        "task/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"
+        "tasks/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"
     ),
-    path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
+    path("tasks/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path(
-        "task/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"
+        "tasks/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"
     ),
-    path("task/created/", TaskCreatedListView.as_view(), name="task-created"),
-    path("task/<int:pk>/complete/", complete_task, name="task-complete"),
+    path("tasks/created/", TaskCreatedListView.as_view(), name="task-created"),
+    path("tasks/<int:pk>/complete/", complete_task, name="task-complete"),
 ]

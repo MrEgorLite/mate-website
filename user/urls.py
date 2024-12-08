@@ -10,19 +10,19 @@ from user.views import (
 app_name = "user"
 
 urlpatterns = [
-    path("position/", PositionListView.as_view(), name="position-list"),
+    path("positions/", PositionListView.as_view(), name="position-list"),
     path(
-        "position/create/",
+        "positions/create/",
         PositionCreateView.as_view(),
         name="position-create",
     ),
     path(
-        "position/<int:pk>/update/",
+        "positions/<int:pk>/update/",
         PositionUpdateView.as_view(),
         name="position-update",
     ),
     path(
-        "position/<int:pk>/delete/",
+        "positions/<int:pk>/delete/",
         PositionDeleteView.as_view(),
         name="position-delete",
     ),
