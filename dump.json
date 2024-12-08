@@ -1,20 +1,20 @@
 [
 {
-    "model": "task_manager.position",
+    "model": "user.position",
     "pk": 1,
     "fields": {
         "name": "Developer"
     }
 },
 {
-    "model": "task_manager.position",
+    "model": "user.position",
     "pk": 2,
     "fields": {
         "name": "Project Manager"
     }
 },
 {
-    "model": "task_manager.worker",
+    "model": "user.worker",
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$870000$fJEtl4vIbCrTfyn4tN3P44$XHUTGv02jbDLjiRxn3Gm95WhW3Sed/Dzo/s3NYMOD+I=",
@@ -33,7 +33,7 @@
     }
 },
 {
-    "model": "task_manager.worker",
+    "model": "user.worker",
     "pk": 2,
     "fields": {
         "password": "pbkdf2_sha256$870000$dxE6zav2ohOmAQTIPEOeH1$ksduiwkCG3fXXsfw1XnJnodO1k9t/QW9SqxsU9Jp74U=",
@@ -52,7 +52,7 @@
     }
 },
 {
-    "model": "task_manager.worker",
+    "model": "user.worker",
     "pk": 3,
     "fields": {
         "password": "pbkdf2_sha256$870000$HOIbT2eKtoRd3GGX0I2grq$8Huzo1Vs3Z4exnL863NDOTXznJvZmvtxnK5BE2twv+E=",

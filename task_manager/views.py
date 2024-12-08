@@ -1,23 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import (
-    HttpRequest,
-    HttpResponse,
-    HttpResponseRedirect
-)
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from task_manager.forms import (
-    WorkerCreationForm,
-    WorkerUpdateForm, TaskForm
-)
-from task_manager.models import (
-    Position,
-    TaskType,
-    Worker, Task
-)
+from task_manager.forms import WorkerCreationForm, WorkerUpdateForm, TaskForm
+from task_manager.models import TaskType, Task
+from user.models import Position, Worker
 
 
 class PositionListView(LoginRequiredMixin, generic.ListView):

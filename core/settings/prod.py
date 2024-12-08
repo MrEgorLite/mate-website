@@ -1,4 +1,4 @@
-from .base import *
+from .base import * # noqa
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -24,3 +24,8 @@ DATABASES = {
         "PORT": int(os.environ["POSTGRES_DB_PORT"]),
     }
 }
+
+
+STATIC_ROOT = "static/"
+
+STATICFILES_DIRS = []

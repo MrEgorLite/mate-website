@@ -28,86 +28,50 @@ urlpatterns = [
     path(
         "task-type/create/",
         TaskTypeCreateView.as_view(),
-        name="task-type-create"
+        name="task-type-create",
     ),
     path(
         "task-type/<int:pk>/update/",
         TaskTypeUpdateView.as_view(),
-        name="task-type-update"
+        name="task-type-update",
     ),
     path(
         "task-type/<int:pk>/delete/",
         TaskTypeDeleteView.as_view(),
-        name="task-type-delete"
+        name="task-type-delete",
     ),
-    path(
-        "position/",
-        PositionListView.as_view(),
-        name="position-list"
-    ),
+    path("position/", PositionListView.as_view(), name="position-list"),
     path(
         "position/create/",
         PositionCreateView.as_view(),
-        name="position-create"
+        name="position-create",
     ),
     path(
         "position/<int:pk>/update/",
         PositionUpdateView.as_view(),
-        name="position-update"
+        name="position-update",
     ),
     path(
         "position/<int:pk>/delete/",
         PositionDeleteView.as_view(),
-        name="position-delete"
+        name="position-delete",
     ),
-    path(
-        "register/",
-        WorkerCreateView.as_view(),
-        name="register"
-    ),
-    path(
-        "profile/",
-        profile_view,
-        name="profile"
-    ),
+    path("register/", WorkerCreateView.as_view(), name="register"),
+    path("profile/", profile_view, name="profile"),
     path(
         "profile/<int:pk>/update/",
         WorkerUpdateView.as_view(),
-        name="profile-update"
+        name="profile-update",
     ),
+    path("", TaskListView.as_view(), name="task-list"),
+    path("task/create/", TaskCreateView.as_view(), name="task-create"),
     path(
-        "",
-        TaskListView.as_view(),
-        name="task-list"
+        "task/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"
     ),
+    path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path(
-        "task/create/",
-        TaskCreateView.as_view(),
-        name="task-create"
+        "task/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"
     ),
-    path(
-        "task/<int:pk>/update/",
-        TaskUpdateView.as_view(),
-        name="task-update"
-    ),
-    path(
-        "task/<int:pk>/",
-        TaskDetailView.as_view(),
-        name="task-detail"
-    ),
-    path(
-        "task/<int:pk>/delete/",
-        TaskDeleteView.as_view(),
-        name="task-delete"
-    ),
-    path(
-        "task/created/",
-        TaskCreatedListView.as_view(),
-        name="task-created"
-    ),
-    path(
-        "task/<int:pk>/complete/",
-        complete_task,
-        name="task-complete"
-    ),
+    path("task/created/", TaskCreatedListView.as_view(), name="task-created"),
+    path("task/<int:pk>/complete/", complete_task, name="task-complete"),
 ]

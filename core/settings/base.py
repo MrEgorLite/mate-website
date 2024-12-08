@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
-    "django-insecure-n!5ctx&gz+3%!=m4^+0x0vd*d2pdri$46hx&(5inj#75+fpj$y"
+    "django-insecure-n!5ctx&gz+3%!=m4^+0x0vd*d2pdri$46hx&(5inj#75+fpj$y",
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "crispy_bootstrap5",
+    "user",
     "task_manager",
 ]
 
@@ -125,10 +127,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-STATIC_ROOT = "static_files/"
-
 STATICFILES_DIRS = [
-    BASE_DIR / "static"
+    BASE_DIR / "static",
 ]
 
 # Default primary key field type
@@ -136,7 +136,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "task_manager.Worker"
+AUTH_USER_MODEL = "user.Worker"
 
 LOGIN_REDIRECT_URL = "/"
 
