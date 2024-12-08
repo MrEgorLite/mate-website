@@ -7,7 +7,7 @@
 {% block content %}
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3">Positions</h1>
-    <a class="btn btn-primary" href="{% url 'task_manager:position-create' %}">Create new position</a>
+    <a class="btn btn-primary" href="{% url 'user:position-create' %}">Create new position</a>
   </div>
 
   <div class="table-responsive">
@@ -25,10 +25,10 @@
             <td>{{ forloop.counter }}</td>
             <td>{{ position.name }}</td>
             <td class="text-center">
-              <a class="btn btn-sm btn-primary me-2" href="{% url 'task_manager:position-update' position.pk %}">
+              <a class="btn btn-sm btn-primary me-2" href="{% url 'user:position-update' position.pk %}">
                 Update
               </a>
-              <a class="btn btn-sm btn-danger" href="{% url 'task_manager:position-delete' position.pk %}">
+              <a class="btn btn-sm btn-danger" href="{% url 'user:position-delete' position.pk %}">
                 Delete
               </a>
             </td>

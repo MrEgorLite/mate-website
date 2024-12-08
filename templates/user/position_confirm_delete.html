@@ -13,7 +13,7 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-danger w-100">Confirm Delete</button>
       </form>
-      <a href="{% url 'task_manager:position-list' %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
+      <a href="{% url 'user:position-list' %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
     </div>
   </div>
 {% endblock %}

@@ -2,7 +2,7 @@
   <ul class="nav nav-pills flex-column mb-auto">
     {% if user.is_authenticated %}
       <li class="nav-item mb-2">
-        <a class="btn btn-primary w-100" href="{% url 'task_manager:profile' %}">Profile</a>
+        <a class="btn btn-primary w-100" href="{% url 'user:profile' %}">Profile</a>
       </li>
       <li class="nav-item mb-2">
         <form action="{% url 'logout' %}" method="post" class="d-grid">
@@ -19,7 +19,7 @@
     <hr>
 
     <li class="nav-item mb-2">
-      <a class="nav-link text-dark" href="{% url 'task_manager:position-list' %}">
+      <a class="nav-link text-dark" href="{% url 'user:position-list' %}">
         <i class="bi bi-people"></i> Positions
       </a>
     </li>

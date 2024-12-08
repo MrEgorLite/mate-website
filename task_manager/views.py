@@ -1,34 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from task_manager.forms import WorkerCreationForm, WorkerUpdateForm, TaskForm
+from task_manager.forms import TaskForm
 from task_manager.models import TaskType, Task
-from user.models import Position, Worker
-
-
-class PositionListView(LoginRequiredMixin, generic.ListView):
-    model = Position
-
-
-class PositionCreateView(LoginRequiredMixin, generic.CreateView):
-    model = Position
-    fields = ["name"]
-    success_url = reverse_lazy("task_manager:position-list")
-
-
-class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Position
-    fields = ["name"]
-    success_url = reverse_lazy("task_manager:position-list")
-
-
-class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
-    model = Position
-    success_url = reverse_lazy("task_manager:position-list")
 
 
 class TaskTypeListView(LoginRequiredMixin, generic.ListView):
@@ -54,24 +31,6 @@ class TaskTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = TaskType
     template_name = "task_manager/task_type_confirm_delete.html"
     success_url = reverse_lazy("task_manager:task-type-list")
-
-
-class WorkerCreateView(generic.CreateView):
-    model = Worker
-    form_class = WorkerCreationForm
-    success_url = reverse_lazy("login")
-    template_name = "registration/register.html"
-
-
-@login_required
-def profile_view(request: HttpRequest) -> HttpResponse:
-    return render(request, "task_manager/profile.html")
-
-
-class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Worker
-    form_class = WorkerUpdateForm
-    success_url = reverse_lazy("task_manager:profile")
 
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
