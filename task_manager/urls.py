@@ -11,7 +11,7 @@ from task_manager.views import (
     TaskDeleteView,
     TaskCreatedListView,
     TaskDetailView,
-    complete_task,
+    CompleteTaskView,
 )
 
 app_name = "task_manager"
@@ -43,5 +43,9 @@ urlpatterns = [
         "tasks/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"
     ),
     path("tasks/created/", TaskCreatedListView.as_view(), name="task-created"),
-    path("tasks/<int:pk>/complete/", complete_task, name="task-complete"),
+    path(
+        "tasks/<int:pk>/complete/",
+        CompleteTaskView.as_view(),
+        name="task-complete",
+    ),
 ]

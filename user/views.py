@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -29,6 +30,7 @@ class PositionDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Position
     success_url = reverse_lazy("user:position-list")
 
+
 class WorkerCreateView(generic.CreateView):
     model = Worker
     form_class = WorkerCreationForm
@@ -36,9 +38,11 @@ class WorkerCreateView(generic.CreateView):
     template_name = "registration/register.html"
 
 
-@login_required
-def profile_view(request: HttpRequest) -> HttpResponse:
-    return render(request, "user/profile.html")
+class Profile(LoginRequiredMixin, generic.View):
+    template_name = "user/profile.html"
+
+    def get(self, request: HttpRequest) -> HttpResponse:
+        return render(request, self.template_name)
 
 
 class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):

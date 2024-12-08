@@ -4,7 +4,10 @@ from user.views import (
     PositionCreateView,
     PositionUpdateView,
     PositionDeleteView,
-    PositionListView, WorkerCreateView, profile_view, WorkerUpdateView,
+    PositionListView,
+    WorkerCreateView,
+    Profile,
+    WorkerUpdateView,
 )
 
 app_name = "user"
@@ -27,7 +30,7 @@ urlpatterns = [
         name="position-delete",
     ),
     path("register/", WorkerCreateView.as_view(), name="register"),
-    path("profile/", profile_view, name="profile"),
+    path("profile/", Profile.as_view(), name="profile"),
     path(
         "profile/<int:pk>/update/",
         WorkerUpdateView.as_view(),

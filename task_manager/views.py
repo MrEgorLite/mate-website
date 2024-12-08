@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
@@ -45,7 +46,11 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
 
     def get_queryset(self):
-        return Task.objects.filter(id=self.kwargs["pk"]).select_related("author").select_related("task_type")
+        return (
+            Task.objects.filter(id=self.kwargs["pk"])
+            .select_related("author")
+            .select_related("task_type")
+        )
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
@@ -74,18 +79,25 @@ class TaskCreatedListView(LoginRequiredMixin, generic.ListView):
     template_name = "task_manager/task_created_list.html"
 
     def get_queryset(self):
-        queryset = Task.objects.filter(author_id=self.request.user.id).select_related("author").select_related("task_type").prefetch_related("assignees")
+        queryset = (
+            Task.objects.filter(author_id=self.request.user.id)
+            .select_related("author")
+            .select_related("task_type")
+            .prefetch_related("assignees")
+        )
         return queryset
 
 
-@login_required
-def complete_task(request: HttpRequest, pk: int) -> HttpResponse:
-    task = Task.objects.get(pk=pk)
-    task.is_completed = not task.is_completed
-    task.save()
-    referer = request.META.get("HTTP_REFERER")
-    if referer:
-        return HttpResponseRedirect(referer)
-    return HttpResponseRedirect(
-        reverse("task_manager:task-detail", kwargs={"pk": pk}),
-    )
+class CompleteTaskView(LoginRequiredMixin, generic.View):
+    def get(self, request, pk, *args, **kwargs):
+        task = get_object_or_404(Task, pk=pk)
+        task.is_completed = not task.is_completed
+        task.save()
+        referer = request.META.get("HTTP_REFERER")
+
+        if referer:
+            return HttpResponseRedirect(referer)
+
+        return HttpResponseRedirect(
+            reverse("task_manager:task-detail", kwargs={"pk": pk}),
+        )
