@@ -1,0 +1,42 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 250px; min-height: 100vh;">
+  <ul class="nav nav-pills flex-column mb-auto">
+    {% if user.is_authenticated %}
+      <li class="nav-item mb-2">
+        <a class="btn btn-primary w-100" href="{% url 'user:profile' %}">Profile</a>
+      </li>
+      <li class="nav-item mb-2">
+        <form action="{% url 'logout' %}" method="post" class="d-grid">
+          {% csrf_token %}
+          <input class="btn btn-danger w-100" type="submit" value="Logout">
+        </form>
+      </li>
+    {% else %}
+      <li class="nav-item mb-2">
+        <a class="btn btn-primary w-100" href="{% url 'login' %}">Login</a>
+      </li>
+    {% endif %}
+
+    <hr>
+
+    <li class="nav-item mb-2">
+      <a class="nav-link text-dark" href="{% url 'user:position-list' %}">
+        <i class="bi bi-people"></i> Positions
+      </a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link text-dark" href="{% url 'task_manager:task-type-list' %}">
+        <i class="bi bi-list-task"></i> Task Types
+      </a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link text-dark" href="{% url 'task_manager:task-list' %}">
+        <i class="bi bi-check2-square"></i> Tasks
+      </a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link text-dark" href="{% url 'task_manager:task-created' %}">
+        <i class="bi bi-folder-plus"></i> Created Tasks
+      </a>
+    </li>
+  </ul>
+</div>
