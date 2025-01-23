@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>{{ object|yesno:"Update,Create" }} profile</title>
+{% endblock %}
+
+{% block content %}
+  {% load crispy_forms_filters %}
+  <div class="card shadow-sm mx-auto">
+    <div class="card-header bg-primary text-white">
+      <h1 class="h5 mb-0">{{ object|yesno:"Update,Create" }} profile</h1>
+    </div>
+    <div class="card-body">
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a href="{% url 'user:profile' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

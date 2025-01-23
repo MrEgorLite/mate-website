@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Positions</title>
+{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3">Positions</h1>
+    <a class="btn btn-primary" href="{% url 'user:position-create' %}">Create new position</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Position name</th>
+          <th scope="col" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for position in position_list %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ position.name }}</td>
+            <td class="text-center">
+              <a class="btn btn-sm btn-primary me-2" href="{% url 'user:position-update' position.pk %}">
+                Update
+              </a>
+              <a class="btn btn-sm btn-danger" href="{% url 'user:position-delete' position.pk %}">
+                Delete
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

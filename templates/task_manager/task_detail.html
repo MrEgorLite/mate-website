@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Task detail</title>
+{% endblock %}
+
+{% block content %}
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h1 class="h4 mb-0">Task detail</h1>
+      <a href="{% url 'task_manager:task-update' task.pk %}" class="btn btn-light btn-sm">
+        Edit
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <h5>Name</h5>
+        <p>{{ task.name }}</p>
+      </div>
+      {% if task.description %}
+        <div class="mb-3">
+          <h5>Description</h5>
+          <p>{{ task.description }}</p>
+        </div>
+      {% endif %}
+      <div class="mb-3">
+        <h5>Status</h5>
+        {% if task.is_completed %}
+          <span class="badge bg-success">Complete</span>
+        {% else %}
+          <span class="badge bg-warning text-dark">Not Complete</span>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <h5>Type</h5>
+        <p>{{ task.task_type.name }}</p>
+      </div>
+      <div class="mb-3">
+        <h5>Author</h5>
+        <p>{{ task.author }}</p>
+      </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+      <a href="{% url 'task_manager:task-complete' task.pk %}" class="btn {% if task.is_completed %}btn-danger{% else %}btn-success{% endif %}">
+        {% if task.is_completed %}
+          Discard task
+        {% else %}
+          Complete task
+        {% endif %}
+      </a>
+      <a href="{% url 'task_manager:task-list' %}" class="btn btn-secondary">Back</a>
+    </div>
+  </div>
+{% endblock %}
